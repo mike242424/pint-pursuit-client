@@ -1,0 +1,48 @@
+body {
+  background-color: #f0f2f5 !important;
+  padding-top: 80px;
+}
+
+input:focus {
+  border-color: grey !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25) !important;
+} 
+
+nav {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  height: 70px !important;
+}
+
+.expanded {
+  height: 140px !important;
+}
+
+.expanded2 {
+  margin-top: 60px !important;
+}
+
+.title-color {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+button.navbar-toggler.text-light  {
+  border-color: white;
+}
+
+.navbar-toggler-icon {
+  width: 24px;
+  height: 17px;
+  filter: invert(100%);
+  border-radius: 2px;
+}
+
+.navbar-title:hover {
+  color: lightgrey !important;
+}
+
+@media (max-width: 768px) {
+  div.x {
+    text-align: start !important;
+    padding-top: 8px !important;
+  }
+}
