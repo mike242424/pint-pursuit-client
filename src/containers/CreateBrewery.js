@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import SearchNavBar from "../components/AuthNavBar";
 import { addBrewery } from "../features/addBrewerySlice";
+import Loading from "../components/Loading";
 
 const CreateBrewery = () => {
-  const [breweryName, setBreweryName] = useState("");
+  const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -16,15 +17,18 @@ const CreateBrewery = () => {
   const [latitude, setLatitude] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [websiteUrl, setWebsiteUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const userIsLoggedIn = useSelector((state) => state.userAuth.isLoggedIn);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleNameSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     dispatch(
       addBrewery({
-        name: breweryName,
+        name,
         address,
         city,
         state,
@@ -40,7 +44,7 @@ const CreateBrewery = () => {
         if (response.error) {
           alert(response.error.message);
         } else {
-          setBreweryName("");
+          setName("");
           setAddress("");
           setCity("");
           setState("");
@@ -50,6 +54,8 @@ const CreateBrewery = () => {
           setLatitude("");
           setPhoneNumber("");
           setWebsiteUrl("");
+          setIsLoading(false);
+          navigate("/admin");
         }
       })
       .catch((err) => {
@@ -57,45 +63,9 @@ const CreateBrewery = () => {
       });
   };
 
-  const handleNameInputChange = (e) => {
-    setBreweryName(e.target.value);
-  };
-
-  const handleAddressInputChange = (e) => {
-    setAddress(e.target.value);
-  };
-
-  const handleCityInputChange = (e) => {
-    setCity(e.target.value);
-  };
-
-  const handleStateInputChange = (e) => {
-    setState(e.target.value);
-  };
-
-  const handleZipCodeInputChange = (e) => {
-    setZipCode(e.target.value);
-  };
-
-  const handleCountryInputChange = (e) => {
-    setCountry(e.target.value);
-  };
-
-  const handleLongitudeInputChange = (e) => {
-    setLongitude(e.target.value);
-  };
-
-  const handleLatitudeInputChange = (e) => {
-    setLatitude(e.target.value);
-  };
-
-  const handlePhoneNumberInputChange = (e) => {
-    setPhoneNumber(e.target.value);
-  };
-
-  const handleWebsiteUrlInputChange = (e) => {
-    setWebsiteUrl(e.target.value);
-  };
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="create-brewery container text-center">
@@ -109,8 +79,8 @@ const CreateBrewery = () => {
                 type="text"
                 placeholder="Name"
                 className="form-control"
-                value={breweryName}
-                onChange={handleNameInputChange}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               ></input>
             </div>
@@ -120,7 +90,7 @@ const CreateBrewery = () => {
                 placeholder="Address"
                 className="form-control"
                 value={address}
-                onChange={handleAddressInputChange}
+                onChange={(e) => setAddress(e.target.value)}
                 required
               ></input>
             </div>
@@ -130,7 +100,7 @@ const CreateBrewery = () => {
                 placeholder="City"
                 className="form-control"
                 value={city}
-                onChange={handleCityInputChange}
+                onChange={(e) => setCity(e.target.value)}
                 required
               ></input>
             </div>
@@ -140,7 +110,7 @@ const CreateBrewery = () => {
                 placeholder="State"
                 className="form-control"
                 value={state}
-                onChange={handleStateInputChange}
+                onChange={(e) => setState(e.target.value)}
                 required
               ></input>
             </div>
@@ -150,7 +120,7 @@ const CreateBrewery = () => {
                 placeholder="Zip Code"
                 className="form-control"
                 value={zipCode}
-                onChange={handleZipCodeInputChange}
+                onChange={(e) => setZipCode(e.target.value)}
                 required
               ></input>
             </div>
@@ -160,7 +130,7 @@ const CreateBrewery = () => {
                 placeholder="Country"
                 className="form-control"
                 value={country}
-                onChange={handleCountryInputChange}
+                onChange={(e) => setCountry(e.target.value)}
                 required
               ></input>
             </div>
@@ -170,7 +140,7 @@ const CreateBrewery = () => {
                 placeholder="Longitude"
                 className="form-control"
                 value={longitude}
-                onChange={handleLongitudeInputChange}
+                onChange={(e) => setLongitude(e.target.value)}
                 required
               ></input>
             </div>
@@ -180,7 +150,7 @@ const CreateBrewery = () => {
                 placeholder="Latitude"
                 className="form-control"
                 value={latitude}
-                onChange={handleLatitudeInputChange}
+                onChange={(e) => setLatitude(e.target.value)}
                 required
               ></input>
             </div>
@@ -190,7 +160,7 @@ const CreateBrewery = () => {
                 placeholder="Phone Number"
                 className="form-control"
                 value={phoneNumber}
-                onChange={handlePhoneNumberInputChange}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 required
               ></input>
             </div>
@@ -200,7 +170,7 @@ const CreateBrewery = () => {
                 placeholder="Website URL"
                 className="form-control"
                 value={websiteUrl}
-                onChange={handleWebsiteUrlInputChange}
+                onChange={(e) => setWebsiteUrl(e.target.value)}
                 required
               ></input>
             </div>
