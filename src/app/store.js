@@ -7,7 +7,7 @@ import updateReviewReducer from "../features/updateReviewSlice";
 import addReviewReducer from "../features/addReviewSlice";
 import updateBreweryReducer from "../features//updateBrewerySlice";
 import deleteReviewReducer from "../features/deleteReviewSlice";
-import reviewsByBreweryIdReducer from "../features/getReviewsByBreweryIdSlice";
+import getReviewsReducer from "../features/getReviewsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,7 +19,7 @@ export const store = configureStore({
     addReview: addReviewReducer,
     deleteReview: deleteReviewReducer,
     updateReview: updateReviewReducer,
-    reviewsByBreweryId: reviewsByBreweryIdReducer,
+    getReviews: getReviewsReducer,
   },
   devTools: true,
 });
