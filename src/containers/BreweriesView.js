@@ -13,7 +13,7 @@ const BreweriesView = () => {
   const [city, setCity] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const LIMIT = 10;
@@ -24,15 +24,9 @@ const BreweriesView = () => {
     }
   }, [breweryList]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-  }, []);
-
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(false);
+    setIsLoading(true);
 
     dispatch(fetchBreweries({ name, city, state }))
       .then((response) => {
@@ -42,7 +36,7 @@ const BreweriesView = () => {
           setName("");
           setState("");
           setCity("");
-          setIsLoading(true);
+          setIsLoading(false);
         }
       })
       .catch((err) => {
