@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signup, login } from "../features/userAuthSlice";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/UnauthNavBar";
+import Loading from "../components/Loading";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -17,9 +18,12 @@ const Login = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [signupError, setSignupError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
+
+    setIsLoading(true);
 
     dispatch(
       signup({
@@ -35,6 +39,7 @@ const Login = () => {
           setSignupEmail("");
           setSignupUsername("");
           setSignupPassword("");
+          setIsLoading(false);
         }
       })
       .catch((error) => {
@@ -45,6 +50,8 @@ const Login = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
     dispatch(login({ username: loginUsername, password: loginPassword }))
       .then((response) => {
         if (response.error) {
@@ -52,6 +59,7 @@ const Login = () => {
         } else {
           setLoginUsername("");
           setLoginPassword("");
+          setIsLoading(false);
         }
       })
       .catch((error) => {
@@ -66,6 +74,10 @@ const Login = () => {
       navigate("/");
     }
   }, [navigate, user.isLoggedIn]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="login">
