@@ -3,7 +3,7 @@ import axios from "axios";
 import { createAuthHeader } from "../common/utils/createAuthHeader";
 import getBreweriesSlice from "./getBreweriesSlice";
 
-const API_URL = "http://localhost:3001/api/breweries";
+const API_URL = process.env.REACT_APP_BASE_URL + "/api/breweries";
 
 export const deleteBrewery = createAsyncThunk(
   "brewery/deleteBrewery",

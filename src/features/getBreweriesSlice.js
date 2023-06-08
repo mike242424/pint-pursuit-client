@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAuthHeader } from "../common/utils/createAuthHeader";
 
-const API_URL = "http://localhost:3001/api/breweries";
+const API_URL = process.env.REACT_APP_BASE_URL + "/api/breweries";
 
 export const fetchBreweries = createAsyncThunk(
   "getBreweries/fetchBreweries",
   async ({ name, city, state }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${API_URL}?name=${name}&state=${state}&city=${city}&sort_by=rating`,
+        `${API_URL}?name=${name}&state=${state}&city=${city}`,
         createAuthHeader()
       );
       return response.data;

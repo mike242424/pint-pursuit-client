@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAuthHeader } from "../common/utils/createAuthHeader";
 
-const API_URL = "http://localhost:3001/api/ratings";
+const API_URL = process.env.REACT_APP_BASE_URL + +"/api/ratings";
 
 export const addReview = createAsyncThunk(
   "ratings/addReview",

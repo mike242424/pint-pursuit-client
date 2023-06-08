@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAuthHeader } from "../common/utils/createAuthHeader";
 
-const API_URL = "http://localhost:3001/api/breweries";
+const API_URL = process.env.REACT_APP_BASE_URL + "/api/breweries";
 
 export const fetchBreweryByBreweryId = createAsyncThunk(
   "getBrewery/fetchBreweryByBreweryId",
