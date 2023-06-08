@@ -18,16 +18,13 @@ const Reviews = () => {
   const [updatedReview, setUpdatedReview] = useState("");
 
   const breweryById = useSelector((state) => state.breweryById);
-  const addedReviews = useSelector((state) => state.addReview);
-  const deletedReviews = useSelector((state) => state.deleteReview);
-  const updatedReviews = useSelector((state) => state.updatedReview);
 
   const { _id } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchBreweryByBreweryId(_id));
-  }, [dispatch, _id, addedReviews, deletedReviews, updatedReviews]);
+  }, [dispatch, _id]);
 
   const handleAddReviewSubmit = (e) => {
     e.preventDefault();
