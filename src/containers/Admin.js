@@ -17,6 +17,7 @@ import {
   faArrowUpRightFromSquare,
   faComment,
 } from "@fortawesome/free-solid-svg-icons";
+import Loading from "../components/Loading";
 
 const Admin = () => {
   const breweryList = useSelector((state) => state.getBreweries.breweries);

@@ -13,7 +13,7 @@ const BreweriesView = () => {
   const [city, setCity] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
   const LIMIT = 10;
@@ -32,7 +32,7 @@ const BreweriesView = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsLoading(false);
 
     dispatch(fetchBreweries({ name, city, state }))
       .then((response) => {
@@ -42,7 +42,7 @@ const BreweriesView = () => {
           setName("");
           setState("");
           setCity("");
-          setIsLoading(false);
+          setIsLoading(true);
         }
       })
       .catch((err) => {
