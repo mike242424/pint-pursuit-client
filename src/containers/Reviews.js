@@ -19,13 +19,23 @@ const Reviews = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const breweryById = useSelector((state) => state.breweryById);
+  const addedReviews = useSelector((state) => state.addReview);
+  const deletedReviews = useSelector((state) => state.deleteReview);
+  const updatedReviews = useSelector((state) => state.updatedReview);
 
   const { _id } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchBreweryByBreweryId(_id));
-  }, [dispatch, _id]);
+    setIsLoading(true);
+    dispatch(fetchBreweryByBreweryId(_id)).then((response) => {
+      if (response.error) {
+        alert(response.error.message);
+      } else {
+        setIsLoading(false);
+      }
+    });
+  }, [dispatch, _id, addedReviews, deletedReviews, updatedReviews]);
 
   const handleAddReviewSubmit = (e) => {
     e.preventDefault();
@@ -79,6 +89,7 @@ const Reviews = () => {
 
   const handleDelete = (reviewId) => {
     setIsLoading(true);
+
     dispatch(deleteReview({ ratingId: reviewId }))
       .then((response) => {
         if (response.error) {
