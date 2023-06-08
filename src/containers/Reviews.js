@@ -16,6 +16,7 @@ const Reviews = () => {
   const [review, setReview] = useState("");
   const [updatedRating, setUpdatedRating] = useState("");
   const [updatedReview, setUpdatedReview] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const breweryById = useSelector((state) => state.breweryById);
 
@@ -28,6 +29,7 @@ const Reviews = () => {
 
   const handleAddReviewSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     dispatch(
       addReview({
@@ -42,6 +44,7 @@ const Reviews = () => {
         } else {
           setRating(0);
           setReview("");
+          setIsLoading(false);
         }
       })
       .catch((err) => {
@@ -51,6 +54,7 @@ const Reviews = () => {
 
   const handleUpdateReviewSubmit = (e, reviewId) => {
     e.preventDefault();
+    setIsLoading(true);
 
     dispatch(
       updateReview({
@@ -65,6 +69,7 @@ const Reviews = () => {
         } else {
           setUpdatedRating(0);
           setUpdatedReview("");
+          setIsLoading(false);
         }
       })
       .catch((err) => {
@@ -73,10 +78,13 @@ const Reviews = () => {
   };
 
   const handleDelete = (reviewId) => {
+    setIsLoading(true);
     dispatch(deleteReview({ ratingId: reviewId }))
       .then((response) => {
         if (response.error) {
           alert(response.error.message);
+        } else {
+          setIsLoading(false);
         }
       })
       .catch((err) => {
@@ -85,10 +93,19 @@ const Reviews = () => {
   };
 
   const handleHomeButtonClick = () => {
-    dispatch(fetchBreweries({ name: null, city: null, state: null }));
+    setIsLoading(true);
+    dispatch(fetchBreweries({ name: null, city: null, state: null })).then(
+      (response) => {
+        if (response.error) {
+          alert(response.error.message);
+        } else {
+          setIsLoading(false);
+        }
+      }
+    );
   };
 
-  if (breweryById.loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
