@@ -52,7 +52,7 @@ const Reviews = () => {
         if (response.error) {
           alert(response.error.message);
         } else {
-          setRating(0);
+          setRating("");
           setReview("");
           setIsLoading(false);
         }
@@ -77,7 +77,7 @@ const Reviews = () => {
         if (response.error) {
           alert(response.error.message);
         } else {
-          setUpdatedRating(0);
+          setUpdatedRating("");
           setUpdatedReview("");
           setIsLoading(false);
         }
@@ -132,7 +132,7 @@ const Reviews = () => {
               <button
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-reviews-modal"
+                data-bs-target="#new-reviews-modal"
               >
                 Add Review
               </button>
@@ -268,7 +268,7 @@ const Reviews = () => {
       </div>
       <div
         className="modal fade"
-        id="add-reviews-modal"
+        id="new-reviews-modal"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="modal-title"
