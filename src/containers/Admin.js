@@ -38,13 +38,25 @@ const Admin = () => {
   const [updatedLatitude, setUpdatedLatitude] = useState("");
   const [updatedPhone, setUpdatedPhone] = useState("");
   const [updatedWebsiteURL, setUpdatedWebsiteURL] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const LIMIT = 10;
 
   useEffect(() => {
-    dispatch(fetchBreweries(name, city, state));
-    setName("");
+    setIsLoading(true);
+    dispatch(fetchBreweries(name, city, state))
+      .then((response) => {
+        if (response.error) {
+          alert(response.error.message);
+        } else {
+          setName("");
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [deletedBreweryId, dispatch, updatedName, updatedCity, updatedState]);
 
   useEffect(() => {
@@ -55,11 +67,16 @@ const Admin = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log(name);
-    console.log(city);
-    console.log(state);
-    dispatch(fetchBreweries({ name, city, state }));
-    setName("");
+
+    setIsLoading(true);
+    dispatch(fetchBreweries({ name, city, state })).then((response) => {
+      if (response.error) {
+        alert(response.error.message);
+      } else {
+        setName("");
+        setIsLoading(false);
+      }
+    });
   };
 
   const handleNextPage = () => {
@@ -71,9 +88,11 @@ const Admin = () => {
   };
 
   const handleDelete = (breweryId) => {
+    setIsLoading(true);
     dispatch(deleteBrewery({ breweryId }))
       .then(() => {
         setDeletedBreweryId(breweryId);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -122,6 +141,10 @@ const Admin = () => {
   const startIndex = (currentPage - 1) * LIMIT;
   const endIndex = currentPage * LIMIT;
   const paginatedBreweries = breweryList.slice(startIndex, endIndex);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="home-page">
