@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAuthHeader } from "../common/utils/createAuthHeader";
 
-const API_URL = process.env.REACT_APP_BASE_URL + "/api/ratings";
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 export const deleteReview = createAsyncThunk(
   "review/deleteReview",
   async ({ ratingId }, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        API_URL + `/${ratingId}`,
+        API_URL + `/api/ratings/${ratingId}`,
         createAuthHeader()
       );
       return response.data;

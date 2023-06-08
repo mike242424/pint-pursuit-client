@@ -3,14 +3,14 @@ import axios from "axios";
 import { createAuthHeader } from "../common/utils/createAuthHeader";
 import getBreweriesSlice from "./getBreweriesSlice";
 
-const API_URL = process.env.REACT_APP_BASE_URL + "/api/breweries";
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 export const deleteBrewery = createAsyncThunk(
   "brewery/deleteBrewery",
   async ({ breweryId }, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        API_URL + `/${breweryId}`,
+        API_URL + `/api/breweries/${breweryId}`,
         createAuthHeader()
       );
       return response.data;

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAuthHeader } from "../common/utils/createAuthHeader";
 
-const API_URL = process.env.REACT_APP_BASE_URL + "/api/breweries";
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 export const addBrewery = createAsyncThunk(
   "brewery/addBrewery",
@@ -20,7 +20,7 @@ export const addBrewery = createAsyncThunk(
   }) => {
     try {
       const response = await axios.post(
-        API_URL,
+        API_URL + "/api/breweries",
         {
           name,
           address,

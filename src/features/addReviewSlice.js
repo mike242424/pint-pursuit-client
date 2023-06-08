@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAuthHeader } from "../common/utils/createAuthHeader";
 
-const API_URL = process.env.REACT_APP_BASE_URL + +"/api/ratings";
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 export const addReview = createAsyncThunk(
   "ratings/addReview",
   async ({ breweryId, rating, review }) => {
     try {
       const response = await axios.post(
-        API_URL + `/breweries/${breweryId}`,
+        API_URL + `/api/ratings/breweries/${breweryId}`,
         {
           rating,
           review,
