@@ -3,7 +3,7 @@ import AuthNavBar from "../components/AuthNavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBreweries } from "../features/getBreweriesSlice";
 import Pagination from "../components/Pagination";
-import BreweryPreview from "../components/BreweryView";
+import BreweryView from "../components/BreweryView";
 import Loading from "../components/Loading";
 
 const BreweriesView = () => {
@@ -127,7 +127,7 @@ const BreweriesView = () => {
         <div className="row">
           {paginatedBreweries &&
             paginatedBreweries.map((brewery) => (
-              <BreweryPreview key={brewery._id} brewery={brewery} />
+              <BreweryView key={brewery._id} brewery={brewery} />
             ))}
         </div>
         {breweryList.length === 0 ? (
