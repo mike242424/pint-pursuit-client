@@ -9,7 +9,7 @@ export const fetchBreweries = createAsyncThunk(
   async ({ name, city, state }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${API_URL}?name=${name}&state=${state}&city=${city}`,
+        `${API_URL}?name=${name}&state=${state}&city=${city}&sort_by=name_asc`,
         createAuthHeader()
       );
       return response.data;
