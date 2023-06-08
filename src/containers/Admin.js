@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./Login";
-// import Map from "../containers/Map";
+import Map from "../containers/Map";
 import SearchNavBar from "../components/AuthNavBar";
 import Pagination from "../components/Pagination";
 import StarRatings from "../components/StarRatings";
@@ -290,10 +290,10 @@ const Admin = () => {
                         </div>
                       </div>
                       <div className="col-xs-12 col-lg-6">
-                        {/* <Map
+                        <Map
                           latitude={brewery.latitude}
                           longitude={brewery.longitude}
-                        /> */}
+                        />
                       </div>
                       <div
                         className="modal fade"

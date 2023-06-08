@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { calculateAverageRating } from "../common/utils/calculateAverageRating";
 import { formatPhoneNumber } from "../common/utils/formatPhoneNumbers.js.js";
 import StarRatings from "./StarRatings";
-// import Map from "../containers/Map";
+import Map from "../containers/Map";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
@@ -78,9 +78,9 @@ const BreweryView = ({ brewery }) => {
               </Link>
             </div>
           </div>
-          {/* <div className="col-xs-12 col-lg-6">
+          <div className="col-xs-12 col-lg-6">
             <Map latitude={brewery.latitude} longitude={brewery.longitude} />
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
