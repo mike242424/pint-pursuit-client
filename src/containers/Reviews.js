@@ -75,7 +75,7 @@ const Reviews = () => {
     )
       .then((response) => {
         if (response.error) {
-          alert(response.error.message);
+          alert("You cannot update this review");
         } else {
           setUpdatedRating("");
           setUpdatedReview("");
@@ -93,7 +93,7 @@ const Reviews = () => {
     dispatch(deleteReview({ ratingId: reviewId }))
       .then((response) => {
         if (response.error) {
-          alert(response.error.message);
+          alert("You cannot delete this review");
         } else {
           setIsLoading(false);
         }
