@@ -56,6 +56,8 @@ const Login = () => {
       .then((response) => {
         if (response.error) {
           setLoginError(response.error.message);
+          setIsLoading(false); 
+          navigate("/"); 
         } else {
           setLoginUsername("");
           setLoginPassword("");
@@ -66,6 +68,7 @@ const Login = () => {
         console.log(error);
       });
   };
+
 
   useEffect(() => {
     if (user.isLoggedIn) {
